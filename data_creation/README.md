@@ -4,7 +4,7 @@ This folder comprises steps to create the data from FrameNet to GENEVA. You can 
 
 ## Download FrameNet data
 
-You have to first download the FrameNet data. You can request for this data here - [Request FrameNet Data](https://framenet.icsi.berkeley.edu/fndrupal/framenet_request_data). We use the version 1.7 of this data for creating GENEVA and save it in this folder.
+You have to first download the FrameNet data. You can request for this data here - [Request FrameNet Data](https://framenet.icsi.berkeley.edu/fndrupal/framenet_request_data). We use the version 1.7 of this data for creating GENEVA and save it in this folder as `fndata-1.7`.
 
 ## Conversion to EE format
 
@@ -39,7 +39,7 @@ Note that we manually correct a couple of examples which had parsing error
 Next, we map the frames and frame elements from FrameNet to events and argument roles for GENEVA. The mapping has been generated through human expert annotation.
 
 ```
-python create_dataset_from_annotations.py -a ../processed_data/final_annotations.tsv -f fndata-1.7/frame -i ../processed_data/filtered_geneva_data.json -o ../processed_data/filtered_geneva_mapped_data.json -d ../processed_data
+python create_dataset_from_annotations.py -a ../processed_data/fn2geneva_mapping_annotations.tsv -f fndata-1.7/frame -i ../processed_data/filtered_geneva_data.json -o ../processed_data/filtered_geneva_mapped_data.json -d ../processed_data
 ```
 where
 * `a` - path to the human annotated FrameNet to GENEVA mapping. You can modify this file based on your requirements
@@ -62,7 +62,7 @@ python deduplicate.py -i ../processed_data/filtered_geneva_mapped_data.json -o .
 
 ## Data Split
 
-We use the following script to split the data into train/val/test. We ensure that the test comprsises at least 5 event mentions for each event and a minimum of 10% of the total data. You can alter these ratios in the hyperparameters of the script
+We use the following script to split the data into train/val/test. We ensure that the test comprises at least 5 event mentions for each event and a minimum of 10% of the total data. You can alter these ratios in the hyperparameters of the script
 
 ```
 python split_data.py -i ../processed_data/final_filtered_geneva_mapped_cleaned_data.json -o ../data

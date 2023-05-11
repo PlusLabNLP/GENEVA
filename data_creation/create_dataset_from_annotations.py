@@ -89,7 +89,13 @@ def read_annotations(filename, frames_dict, args2id):
     
     with open(filename, 'r') as f:
         prev_event = 0
+        header = 1
         for line in f:
+
+            if header:
+                header = 0
+                continue
+
             fields = line.split("\t")
 
             # Check if line has new event
