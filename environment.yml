@@ -1,4 +1,4 @@
-name: hitl_eae
+name: geneva
 channels:
   - pytorch
   - defaults
